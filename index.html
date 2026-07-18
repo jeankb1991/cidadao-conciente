@@ -144,19 +144,19 @@
             <label for="prioridade" class="lbl">Prioridade</label>
             <div class="priority-selector">
               <label class="prio-radio low">
-                <input type="radio" name="prioridade" value="Baixa">
+                <input type="radio" name="prioridade" value="Baixa" onchange="if(typeof atualizarMarcadorTooltip === 'function') atualizarMarcadorTooltip()">
                 <span>Baixa</span>
               </label>
               <label class="prio-radio medium">
-                <input type="radio" name="prioridade" value="Média" checked>
+                <input type="radio" name="prioridade" value="Média" checked onchange="if(typeof atualizarMarcadorTooltip === 'function') atualizarMarcadorTooltip()">
                 <span>Média</span>
               </label>
               <label class="prio-radio high">
-                <input type="radio" name="prioridade" value="Alta">
+                <input type="radio" name="prioridade" value="Alta" onchange="if(typeof atualizarMarcadorTooltip === 'function') atualizarMarcadorTooltip()">
                 <span>Alta</span>
               </label>
               <label class="prio-radio urgent">
-                <input type="radio" name="prioridade" value="Urgente">
+                <input type="radio" name="prioridade" value="Urgente" onchange="if(typeof atualizarMarcadorTooltip === 'function') atualizarMarcadorTooltip()">
                 <span>Urgente</span>
               </label>
             </div>

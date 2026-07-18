@@ -51,6 +51,10 @@ function setupCategories() {
       // Salva no state
       state.categoria = card.dataset.category;
       document.getElementById('selectedCategory').value = state.categoria;
+      
+      if (typeof atualizarMarcadorTooltip === 'function') {
+        atualizarMarcadorTooltip();
+      }
     });
   });
 }
@@ -216,7 +220,30 @@ function atualizarLocalizacao(lat, lng, centralizar = false) {
     marker = L.marker([lat, lng], { draggable: false }).addTo(map);
   }
 
+  atualizarMarcadorTooltip();
   document.getElementById('coordsDisplay').textContent = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+}
+
+function atualizarMarcadorTooltip() {
+  if (!marker) return;
+
+  const catInfo = state.categoria ? catIcons[state.categoria] : null;
+  const prioridade = document.querySelector('input[name="prioridade"]:checked')?.value || 'Média';
+  
+  let html = `<div style="text-align:center; font-family:var(--font-sans);">`;
+  html += `<strong style="color:var(--primary); font-size:1.1em;">📍 Local do Problema</strong><br>`;
+  
+  if (catInfo) {
+    html += `<span style="font-size:1.5rem; display:block; margin:5px 0;">${catInfo.icon}</span>`;
+    html += `<b>${catInfo.label}</b><br>`;
+    html += `<small style="color:#666;">Prioridade: ${prioridade}</small>`;
+  } else {
+    html += `<i style="color:#666;">Selecione o problema no Passo 1</i>`;
+  }
+  
+  html += `</div>`;
+  
+  marker.bindPopup(html).openPopup();
 }
 
 // =========================
